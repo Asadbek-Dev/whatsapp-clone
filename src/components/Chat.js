@@ -1,13 +1,25 @@
 import { Avatar, IconButton } from '@material-ui/core';
-import { AttachFile, MoreVert, SearchOutlined } from '@material-ui/icons';
+import { AttachFile, InsertEmoticon, InsertEmoticonOutlined, Mic, MoreVert, SearchOutlined } from '@material-ui/icons';
+import userEvent from '@testing-library/user-event';
 import React, { useEffect, useState } from 'react';
 import '../style/Chat.css'
 
 const Chat = () => {
+    const [input, setInput] = useState('');
     const [seed, setSeed] = useState('');
+
     useEffect(() => {
         setSeed(Math.floor(Math.random() * 5000));
     }, []);
+
+    const sendMessage = (e) => {
+        e.preventDefault();
+        console.log('You typed >>> ', input);
+        setInput('');
+    }
+
+
+
     return (
         <div className='chat'>
             <div className='chat__header'>
@@ -30,13 +42,20 @@ const Chat = () => {
             </div>
             <div className='chat__body'>
 
-                <p className='chat__message chat__reciever'>
+                <p className={`chat__message ${true && 'chat__reciever'}`}>
                     <span className='chat__name'>Asadbek</span>
                     Hey Guys
                     <span className='chat__timestamp'>11:12pm</span>
                 </p>
             </div>
-            <div className='chat__footer'></div>
+            <div className='chat__footer'>
+                <InsertEmoticonOutlined />
+                <form>
+                    <input value={input} onChange={(e) => setInput(e.target.value)} type='text' placeholder='Type a message' />
+                    <button onClick={sendMessage} type='submit'>Send a message</button>
+                </form>
+                <Mic />
+            </div>
         </div>
     )
 }
