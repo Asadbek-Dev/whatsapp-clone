@@ -1,6 +1,6 @@
 import { Avatar, IconButton } from '@material-ui/core';
 import { AttachFile, InsertEmoticon, InsertEmoticonOutlined, Mic, MoreVert, SearchOutlined } from '@material-ui/icons';
-import userEvent from '@testing-library/user-event';
+
 import React, { useEffect, useState } from 'react';
 import '../style/Chat.css'
 
